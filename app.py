@@ -254,4 +254,8 @@ if __name__ == '__main__':
     logger.debug('Starting application')
     with app.app_context():
         db.create_all()
-    app.run(host='127.0.0.1', port=5001, debug=True) 
+    app.run(host='127.0.0.1', port=5001, debug=True)
+else:
+    # Dit zorgt ervoor dat de database wordt aangemaakt wanneer de app op Render draait
+    with app.app_context():
+        db.create_all() 
