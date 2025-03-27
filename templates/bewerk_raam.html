@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raam Bewerken - Gordijn Metingen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .form-section {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .current-photo {
+            max-width: 200px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Raam Bewerken</h1>
+            <a href="{{ url_for('project_details', project_id=project.id) }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Terug naar Project
+            </a>
+        </div>
+
+        <div class="form-section">
+            <h4>Project: {{ project.projectnummer }}</h4>
+            <p class="mb-0">
+                <strong>Klant:</strong> {{ project.klant }} | 
+                <strong>Locatie:</strong> {{ project.locatie }}
+            </p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            {{ form.project_id }}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form.ruimte.label(class="form-label") }}
+                        {{ form.ruimte(class="form-control") }}
+                        {% if form.ruimte.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.ruimte.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.raamtype.label(class="form-label") }}
+                        {{ form.raamtype(class="form-select") }}
+                        {% if form.raamtype.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.raamtype.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.breedte.label(class="form-label") }}
+                        {{ form.breedte(class="form-control") }}
+                        {% if form.breedte.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.breedte.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.hoogte.label(class="form-label") }}
+                        {{ form.hoogte(class="form-control") }}
+                        {% if form.hoogte.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.hoogte.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.plafondhoogte.label(class="form-label") }}
+                        {{ form.plafondhoogte(class="form-control") }}
+                        {% if form.plafondhoogte.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.plafondhoogte.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form.ophangsysteem.label(class="form-label") }}
+                        {{ form.ophangsysteem(class="form-select") }}
+                        {% if form.ophangsysteem.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.ophangsysteem.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.montagewijze.label(class="form-label") }}
+                        {{ form.montagewijze(class="form-select") }}
+                        {% if form.montagewijze.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.montagewijze.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.rail_lengte.label(class="form-label") }}
+                        {{ form.rail_lengte(class="form-control") }}
+                        {% if form.rail_lengte.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.rail_lengte.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.stof.label(class="form-label") }}
+                        {{ form.stof(class="form-control") }}
+                        {% if form.stof.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.stof.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form.voering.label(class="form-label") }}
+                        {{ form.voering(class="form-select") }}
+                        {% if form.voering.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.voering.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.plooi.label(class="form-label") }}
+                        {{ form.plooi(class="form-select") }}
+                        {% if form.plooi.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.plooi.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            {{ form.motorisatie(class="form-check-input") }}
+                            {{ form.motorisatie.label(class="form-check-label") }}
+                            {% if form.motorisatie.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.motorisatie.errors %}
+                                {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form.foto.label(class="form-label") }}
+                        {{ form.foto(class="form-control") }}
+                        {% if form.foto.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.foto.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% if raam.foto %}
+                        <div class="mt-2">
+                            <p class="mb-1">Huidige foto:</p>
+                            <img src="{{ url_for('uploaded_file', filename=raam.foto) }}" alt="Huidige foto" class="current-photo">
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form.opmerkingen.label(class="form-label") }}
+                {{ form.opmerkingen(class="form-control", rows=3) }}
+                {% if form.opmerkingen.errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.opmerkingen.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="d-grid gap-2">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

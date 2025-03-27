@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gordijn Metingen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .project-card {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .project-info {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Gordijn Metingen</h1>
+            <a href="{{ url_for('nieuw_project') }}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Nieuw Project
+            </a>
+        </div>
+
+        {% if projecten %}
+            {% for project in projecten %}
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="mb-0">{{ project.projectnummer }}</h3>
+                    <a href="{{ url_for('project_details', project_id=project.id) }}" class="btn btn-outline-primary">
+                        <i class="bi bi-eye"></i> Bekijk Details
+                    </a>
+                </div>
+                <div class="project-info">
+                    <p class="mb-1"><strong>Klant:</strong> {{ project.klant }}</p>
+                    <p class="mb-1"><strong>Locatie:</strong> {{ project.locatie }}</p>
+                    <p class="mb-0"><strong>Datum:</strong> {{ project.datum.strftime('%d-%m-%Y') }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle"></i> Er zijn nog geen projecten aangemaakt.
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

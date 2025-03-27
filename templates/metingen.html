@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gordijn Metingen Overzicht</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .meting-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .meting-header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .meting-details {
+            margin-bottom: 15px;
+        }
+        .meting-section {
+            margin-bottom: 10px;
+        }
+        .meting-label {
+            font-weight: bold;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Gordijn Metingen Overzicht</h1>
+            <a href="/" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Nieuwe Meting
+            </a>
+        </div>
+
+        {% if metingen %}
+            {% for meting in metingen %}
+                <div class="meting-card">
+                    <div class="meting-header">
+                        <h3>{{ meting.projectnaam }}</h3>
+                        <small class="text-muted">ID: {{ meting.id }} | Datum: {{ meting.datum }}</small>
+                    </div>
+                    
+                    <div class="meting-details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="meting-section">
+                                    <h5>Project Informatie</h5>
+                                    <p><span class="meting-label">Klant:</span> {{ meting.klant }}</p>
+                                    <p><span class="meting-label">Locatie:</span> {{ meting.locatie }}</p>
+                                    <p><span class="meting-label">Ruimte:</span> {{ meting.ruimte }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="meting-section">
+                                    <h5>Raam Informatie</h5>
+                                    <p><span class="meting-label">Type:</span> {{ meting.raamtype }}</p>
+                                    <p><span class="meting-label">Breedte:</span> {{ meting.afmetingen.breedte }} cm</p>
+                                    <p><span class="meting-label">Hoogte:</span> {{ meting.afmetingen.hoogte }} cm</p>
+                                    <p><span class="meting-label">Plafondhoogte:</span> {{ meting.afmetingen.plafondhoogte }} cm</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="meting-section">
+                                    <h5>Ophangsysteem</h5>
+                                    <p><span class="meting-label">Type:</span> {{ meting.ophangsysteem.type }}</p>
+                                    <p><span class="meting-label">Montagewijze:</span> {{ meting.ophangsysteem.montagewijze }}</p>
+                                    <p><span class="meting-label">Rail lengte:</span> {{ meting.ophangsysteem.rail_lengte }} cm</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="meting-section">
+                                    <h5>Gordijn Specificaties</h5>
+                                    <p><span class="meting-label">Stof:</span> {{ meting.gordijn.stof }}</p>
+                                    <p><span class="meting-label">Voering:</span> {{ meting.gordijn.voering }}</p>
+                                    <p><span class="meting-label">Plooi:</span> {{ meting.gordijn.plooi }}</p>
+                                    <p><span class="meting-label">Motorisatie:</span> {% if meting.gordijn.motorisatie %}Ja{% else %}Nee{% endif %}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if meting.opmerkingen %}
+                            <div class="meting-section">
+                                <h5>Extra Opmerkingen</h5>
+                                <p>{{ meting.opmerkingen }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                Er zijn nog geen metingen opgeslagen. 
+                <a href="/" class="alert-link">Maak een nieuwe meting aan</a>.
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
